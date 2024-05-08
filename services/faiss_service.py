@@ -16,7 +16,7 @@ train_data = [
     },
 ]
 
-faiss_indexes = {i['character_name']: FAISSHelper.load_data(i['character_name']) for i in train_data}
+# faiss_indexes = {i['character_name']: FAISSHelper.load_data(i['character_name']) for i in train_data}
 
 
 @singleton
