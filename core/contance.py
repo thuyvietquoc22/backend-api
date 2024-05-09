@@ -16,6 +16,7 @@ from enum import Enum
 #     },
 # ]
 class CharacterName(Enum):
+    _2B = "2B"
     AZUSA_NAKANO = "Azusa Nakano"
     EDGE_RUNNER_LUCY = "Edge Runner Lucy"
     SAKURA = "Sakura"
@@ -23,6 +24,3 @@ class CharacterName(Enum):
     @property
     def character_name(self):
         return self.name.lower().replace(" ", "_")
-
-
-print(CharacterName.AZUSA_NAKANO.character_name)
