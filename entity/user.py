@@ -39,5 +39,11 @@ class UserCreate(BaseUser):
         )
 
 
+class UserUpdate(BaseModel):
+    user_name: Optional[str] = None
+    full_name: Optional[str] = None
+    photo_url: Optional[str] = None
+
+
 class UserResponse(BaseUser):
     pass

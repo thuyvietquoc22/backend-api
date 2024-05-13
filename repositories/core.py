@@ -9,6 +9,7 @@ from pymongo.collection import Collection
 from decorator.parser import parse_val_as
 from entity.core import BaseMongoModel
 from entity.pagination import Pageable
+from exceptions.not_updated_error import NotUpdatedError
 
 Model = TypeVar("Model", bound=BaseMongoModel)
 CreateModel = TypeVar("CreateModel", bound=BaseMongoModel)
@@ -94,7 +95,7 @@ class BaseRepository(Generic[Model, CreateModel, UpdateModel], ABC):
         result = self.collection.update_one({"_id": ObjectId(obj_id)}, {"$set": obj})
 
         if result.modified_count == 0:
-            raise Exception("Không có bản ghi nào được cập nhật")
+            raise NotUpdatedError("Không có bản ghi nào được cập nhật")
 
         return result
 

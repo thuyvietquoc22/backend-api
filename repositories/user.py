@@ -14,5 +14,11 @@ class UserRepository(BaseRepository):
     @parse_as(UserResponse, get_first=True)
     def check_ref_code(self, ref_code):
         return self.aggregate(
-            {'ref_code': ref_code},
+            {"$match": {'ref_code': ref_code}},
+        )
+
+    @parse_as(UserResponse, get_first=True)
+    def get_user_info_by_tele_id(self, tele_id):
+        return self.aggregate(
+            {"$match": {'tele_id': tele_id}},
         )

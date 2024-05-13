@@ -22,5 +22,9 @@ class Settings(BaseSettings):
 
     SYSTEM_PROMPT: str = "You are the main character in this story, talk to the other person in a short, concise way that is true to the main character's personality."
 
+    # JWT
+    SECRET_KEY: str = "secret"
+    TOKEN_EXPIRED_TIME: int = 24
+
 
 settings = Settings()
