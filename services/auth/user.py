@@ -26,7 +26,7 @@ class UserService:
 
         # Check ref code
         if user_create.ref_code is not None:
-            ref_user = self.user_repo.check_ref_code(user_create.ref_code)
+            ref_user = self.user_repo.get_user_info_by_tele_id(user_create.ref_code)
             if ref_user is None:
                 raise ValueError("Ref code not found.")
 

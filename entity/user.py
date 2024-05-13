@@ -10,7 +10,7 @@ class BaseUser(BaseMongoModel):
     username: Optional[str] = None
     full_name: Optional[str] = None
     photo_url: Optional[str] = None
-    ref_code: Optional[str] = None
+    ref_code: Optional[int] = None
     level: Optional[int] = 0
     experience: Optional[int] = 0
 
@@ -20,7 +20,7 @@ class UserRegister(BaseModel):
     username: Optional[str] = None
     full_name: Optional[str] = None
     photo_url: Optional[str] = None
-    ref_code: Optional[str] = None
+    ref_code: Optional[int] = None
 
 
 class UserCreate(BaseUser):
