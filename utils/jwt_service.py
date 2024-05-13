@@ -29,7 +29,7 @@ class JWTService:
     def secret_key(self) -> OctetJWK:
         return OctetJWK(bytes(settings.SECRET_KEY, 'utf-8'))
 
-    def generate_token(self, payload: Union[str | JWTSerializer]) -> str:
+    def generate_token(self, payload: Union[Any | JWTSerializer]) -> str:
         expire = datetime.now() + timedelta(
             seconds=60 * 60 * settings.TOKEN_EXPIRED_TIME
         )
@@ -37,7 +37,7 @@ class JWTService:
         if isinstance(payload, JWTSerializer):
             to_encode = payload.payload
         else:
-            to_encode = {"sub": str(payload)}
+            to_encode = {"sub": payload}
         to_encode.update({"exp": int(expire.timestamp())})
 
         encoded_jwt = jwt.JWT().encode(to_encode, self.secret_key, alg=self.security_algorithm)
@@ -49,8 +49,3 @@ class JWTService:
             return payload
         except Exception as e:
             logger.error(f"Error when decode token: {e}")
-
-
-a = JWTService().generate_token("Xin chào")
-print(a)
-print(JWTService().decode_token(a))

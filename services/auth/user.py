@@ -47,5 +47,18 @@ class UserService:
 
     def get_user_token(self, tele_id):
         user: UserResponse = self.user_repo.get_user_info_by_tele_id(tele_id)
+        if user is None:
+            raise ValueError("User not found.")
         token = self.jwt_service.generate_token(user.tele_id)
         return token
+
+    def get_user_info_by_token(self, token):
+        payload = JWTService().decode_token(token)
+        tele_id = payload.get("sub", None)
+
+        user = self.user_repo.get_user_info_by_tele_id(tele_id)
+
+        if user is None:
+            raise ValueError("User not found.")
+
+        return user

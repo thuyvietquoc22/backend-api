@@ -18,12 +18,16 @@ class UserRouter(BaseRouter):
         def register_user(user_register: UserRegister):
             return self.user_service.register_user(user_register)
 
+        @router.get("")
+        def get_user_info_by_token(token: str):
+            return self.user_service.get_user_info_by_token(token)
+
         @router.get("/{tele_id}")
         def get_user(tele_id: str):
             return self.user_service.get_user_info_by_id(tele_id)
 
         @router.get("/token/{tele_id}")
-        def get_user_token(tele_id: str):
+        def get_user_token(tele_id: int):
             return self.user_service.get_user_token(tele_id)
 
         return router
