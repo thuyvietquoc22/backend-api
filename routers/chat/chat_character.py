@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
 from core.contance import CharacterName
-from routers import BaseRouter
-from services.chatbot import ChatbotService
+from routers.core import BaseRouter
+from services.chat.chatbot import ChatbotService
 
 
 class ChatCharacterRouter(BaseRouter):

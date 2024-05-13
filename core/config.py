@@ -3,7 +3,7 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-BasePath = Path(__file__).resolve().parent.parent.parent
+BasePath = Path(__file__).resolve().parent.parent
 env_path = os.path.join(BasePath, os.environ.get('ENV_FILE', 'dev.env'))
 
 

@@ -1,8 +1,9 @@
 from fastapi import APIRouter, FastAPI
 
 from core.config import settings
-from routers import BaseRouterGroup
+from routers.auth import AuthRouterGroup
 from routers.chat import ChatRouterGroup
+from routers.core import BaseRouterGroup
 
 
 def register_router(app: FastAPI):
@@ -10,6 +11,7 @@ def register_router(app: FastAPI):
 
     list_router: list[BaseRouterGroup] = [
         ChatRouterGroup(),
+        AuthRouterGroup()
     ]
 
     for router in list_router:

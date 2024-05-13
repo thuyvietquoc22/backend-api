@@ -1,7 +1,9 @@
 import os
 
-from chat_core.trainer import embeddings, FAISSHelper
 from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader
+
+from chat_core.trainer import embeddings, FAISSHelper
+
 
 def scan_directory():
     directory = 'data'
@@ -16,7 +18,6 @@ def scan_directory():
 # Gọi hàm scan_d
 # irectory với đường dẫn thư mục '/data'
 all_dict = scan_directory()
-
 
 for i in all_dict:
     pdf_loader = DirectoryLoader(f"data/{i}", glob="*.pdf", loader_cls=PyPDFLoader)

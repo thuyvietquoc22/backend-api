@@ -1,10 +1,10 @@
 from pymongo import MongoClient
 
-from app.core.config import settings
+from core.config import settings
 
 client = MongoClient(settings.MONGODB_URL)
 
-digital_twin_db = client["digital-twin"]
+ton_db = client["ton"]
 
 
 def start_session():

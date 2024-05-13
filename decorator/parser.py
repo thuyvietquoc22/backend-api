@@ -12,7 +12,7 @@ def parse_as(
         exception_when_none=False,
         message_exception: str = None) -> Callable[[Callable[..., Cursor]], Callable[..., T]]:
     """
-    Nên dùng trong repository để parse data từ database thành kiểu dữ liệu mong muốn
+    Nên dùng trong repositories để parse data từ database thành kiểu dữ liệu mong muốn
     """
 
     def wrapper(func: callable) -> Callable[..., response_type]:

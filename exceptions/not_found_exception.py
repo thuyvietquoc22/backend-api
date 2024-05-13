@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from app.exceptions.base_exception import BaseExceptionMixin
+from exceptions.base_exception import BaseExceptionMixin
 
 
 class NotFoundException(BaseExceptionMixin):

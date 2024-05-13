@@ -1,5 +1,5 @@
-from routers import BaseRouterGroup, BaseRouter
 from routers.chat.chat_character import ChatCharacterRouter
+from routers.core import BaseRouter, BaseRouterGroup
 
 
 class ChatRouterGroup(BaseRouterGroup):

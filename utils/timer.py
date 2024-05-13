@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 
 from decorator import singleton
-from decorator import signleton
 
 
 @singleton

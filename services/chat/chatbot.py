@@ -1,15 +1,13 @@
-from typing import Iterable
-
 from loguru import logger
 from openai import OpenAI
-from openai.types.chat import ChatCompletionMessageParam, ChatCompletion
+from openai.types.chat import ChatCompletion
 
 from core.config import settings
 from core.contance import CharacterName
 from decorator import singleton
 from entity.message_history import MessageHistory
-from services.faiss_service import FAISSService
-from services.message_tracking import MessageTrackingService
+from services.chat.faiss_service import FAISSService
+from services.chat.message_tracking import MessageTrackingService
 
 
 @singleton
