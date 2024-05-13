@@ -6,8 +6,8 @@ from entity.core import BaseMongoModel
 
 
 class BaseUser(BaseMongoModel):
-    tele_id: str
-    user_name: Optional[str] = None
+    tele_id: int
+    username: Optional[str] = None
     full_name: Optional[str] = None
     photo_url: Optional[str] = None
     ref_code: Optional[str] = None
@@ -16,8 +16,8 @@ class BaseUser(BaseMongoModel):
 
 
 class UserRegister(BaseModel):
-    tele_id: str
-    user_name: Optional[str] = None
+    tele_id: int
+    username: Optional[str] = None
     full_name: Optional[str] = None
     photo_url: Optional[str] = None
     ref_code: Optional[str] = None
@@ -30,7 +30,7 @@ class UserCreate(BaseUser):
     def from_register(cls, register: UserRegister):
         return cls(
             tele_id=register.tele_id,
-            user_name=register.user_name,
+            user_name=register.username,
             full_name=register.full_name,
             photo_url=register.photo_url,
             ref_code=register.ref_code,
@@ -40,7 +40,7 @@ class UserCreate(BaseUser):
 
 
 class UserUpdate(BaseModel):
-    user_name: Optional[str] = None
+    username: Optional[str] = None
     full_name: Optional[str] = None
     photo_url: Optional[str] = None
 
