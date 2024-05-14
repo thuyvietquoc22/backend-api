@@ -22,3 +22,9 @@ class UserRepository(BaseRepository):
         return self.aggregate(
             {"$match": {'tele_id': tele_id}},
         )
+
+    @parse_as(list[UserResponse])
+    def get_invited_user(self, tele_id):
+        return self.aggregate(
+            {"$match": {'ref_code': tele_id}},
+        )

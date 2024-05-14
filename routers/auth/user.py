@@ -26,6 +26,11 @@ class UserRouter(BaseRouter):
         def get_user(tele_id: str):
             return self.user_service.get_user_info_by_id(tele_id)
 
+        @router.get("/invited/{tele_id}")
+        def get_invited_user(tele_id: int):
+            invited_user = self.user_service.get_invited_user(tele_id)
+            return len(invited_user)
+
         @router.get("/token/{tele_id}")
         def get_user_token(tele_id: int):
             return self.user_service.get_user_token(tele_id)

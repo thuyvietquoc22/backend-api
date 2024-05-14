@@ -62,3 +62,7 @@ class UserService:
             raise ValueError("User not found.")
 
         return user
+
+    def get_invited_user(self, tele_id):
+        invited_user = self.user_repo.get_invited_user(tele_id)
+        return invited_user
