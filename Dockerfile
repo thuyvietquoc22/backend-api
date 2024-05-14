@@ -5,10 +5,6 @@ FROM python:3.11
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Install dependencies including libgl1-mesa-glx for OpenGL support
-RUN apt-get update \
-    && apt-get install -y libgl1-mesa-glx \
-    && apt-get clean
 
 WORKDIR /app
 
