@@ -1,7 +1,9 @@
+from bson import ObjectId
 from pymongo.collection import Collection
 
 from app.db.mongo.auth.user import user_collection
 from app.decorator.parser import parse_as
+from app.entity.game.stone import Stone
 from app.entity.game.user import UserResponse, User
 from app.repositories.core import BaseRepository
 
@@ -27,4 +29,22 @@ class UserRepository(BaseRepository):
     def get_invited_user(self, tele_id):
         return self.aggregate(
             {"$match": {'ref_code': tele_id}},
+        )
+
+    def update_bag(self, stones: list[Stone], inserted_index: list[int], old_len: int, owner_id: str):
+        inserted_ = {}
+        update_amount = {
+            f"stones.{index}.amount": stone.amount
+            for index, stone in enumerate(stones)
+            if index < old_len and index in inserted_index
+        }
+        inserted_.update({"$set": update_amount})
+
+        update_inserted = [stone.dict() for index, stone in enumerate(stones) if index >= old_len]
+        if len(update_inserted):
+            inserted_.update({"$push": {"stones": {"$each": update_inserted}}})
+
+        self.collection.update_one(
+            {"_id": ObjectId(owner_id)},
+            inserted_
         )

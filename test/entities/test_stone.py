@@ -41,3 +41,33 @@ class TestStone:
 
         index = stones.index(stone)
         assert index == 0
+
+    @staticmethod
+    def test_insert_to_stone_list():
+        stones = [Stone(level=1, color="red", amount=100),
+                  Stone(level=1, color="blue", amount=200),
+                  Stone(level=1, color="red", amount=300),
+                  Stone(level=2, color="red", amount=400),
+                  Stone(level=2, color="red", amount=500),
+                  Stone(level=2, color="red", amount=600),
+                  Stone(level=3, color="red", amount=700),
+                  Stone(level=3, color="red", amount=800),
+                  Stone(level=3, color="red", amount=900)]
+
+        stone = Stone(level=1, color="red", amount=100)
+        stone.insert_to(stones)
+
+        assert stones[0].amount == 200
+        assert len(stones) == 9
+
+    @staticmethod
+    def test_insert_to_stone_list_not_existed():
+        stones = [Stone(level=1, color="red", amount=100),
+                  Stone(level=1, color="blue", amount=200),
+                  Stone(level=3, color="red", amount=900)]
+
+        stone = Stone(level=3, color="blue", amount=700)
+        stone.insert_to(stones)
+
+        assert stones[-1] == stone
+        assert len(stones) == 4

@@ -15,7 +15,7 @@ class AuthenticateRouter(BaseRouter):
 
     @property
     def router(self) -> APIRouter:
-        router = APIRouter(prefix="/authenticate", tags=["Game > Authenticate"])
+        router = APIRouter(prefix="/auth", tags=["Game > Authenticate"])
 
         @router.get("/me", response_model=UserResponse)
         async def read_users_me(

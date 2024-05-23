@@ -10,7 +10,7 @@ def register_router(app: FastAPI):
     api_router = APIRouter()
 
     list_router: list[BaseRouterGroup] = [
-        ChatRouterGroup(),
+        # ChatRouterGroup(),
         GameRouterGroup()
     ]
 

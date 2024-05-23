@@ -2,6 +2,7 @@ from bson import ObjectId
 
 from app.decorator import singleton
 from app.decorator.parser import parse_as
+from app.entity.game.stone import Stone
 from app.entity.game.user import UserRegister, UserCreate, UserResponse, UserUpdate, User
 from app.exceptions.not_updated_error import NotUpdatedError
 from app.repositories.user import UserRepository
@@ -62,3 +63,15 @@ class UserService:
         invited_user = self.user_repo.get_invited_user(tele_id)
         return invited_user
 
+    def add_stone_to_user(self, user: User, stones: list[Stone]):
+        old_len = len(user.stones)  # Dùng kiểm tra có thêm mới đá hay không
+        inserted_index: list[int] = []  # Dùng để update lại số lượng đá nếu đã có trong bag
+
+        for stone in stones:
+            index = stone.insert_to(user.stones)
+            inserted_index.append(index)
+
+        # Remote Duplicate
+        inserted_index = list(set(inserted_index))
+
+        self.user_repo.update_bag(user.stones, inserted_index, old_len, user.id)

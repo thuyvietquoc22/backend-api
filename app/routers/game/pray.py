@@ -6,11 +6,13 @@ from app.entity.game.user import User
 from app.exceptions.auth.authenticate_exception import AuthenticateException
 from app.routers.core import BaseRouter, GameTag
 from app.services.game.authenticate import AuthenticateService
+from app.services.game.pray import PrayService
 
 
 class PrayRouter(BaseRouter):
 
     def __init__(self):
+        self.pray_service = PrayService()
         self.tag = GameTag().get("Pray")
 
     @property
@@ -21,6 +23,6 @@ class PrayRouter(BaseRouter):
         async def pray(login_user: Annotated[User, Depends(AuthenticateService().validate_token)]):
             if login_user is None:
                 raise AuthenticateException("Who are you ???")
-            return {"message": f"{login_user.username} praying.", "status": "Not implemented yet."}
+            return self.pray_service.pray(login_user)
 
         return router

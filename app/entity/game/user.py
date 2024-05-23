@@ -72,5 +72,12 @@ class User(BaseUser):
         return True
 
 
+class UserBasicResponse(BaseModel):
+    username: Optional[str] = None
+    full_name: Optional[str] = None
+    photo_url: Optional[str] = None
+    experience: Optional[int] = 0
+
+
 class UserResponse(BaseUser):
     pass
