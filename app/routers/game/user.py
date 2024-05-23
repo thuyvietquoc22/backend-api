@@ -1,7 +1,10 @@
-from fastapi import APIRouter
+from typing import Annotated
 
-from app.entity.user import UserRegister, UserResponse
+from fastapi import APIRouter, Depends
+
+from app.entity.game.user import UserRegister, UserResponse, User
 from app.routers.core import BaseRouter
+from app.services.game.authenticate import AuthenticateService
 from app.services.game.user import UserService
 
 
@@ -34,5 +37,9 @@ class UserRouter(BaseRouter):
         @router.get("/token/{tele_id}")
         def get_user_token(tele_id: int):
             return self.user_service.get_user_token(tele_id)
+
+        @router.get("/my-bag")
+        def get_bag_info(user=Annotated[User, Depends(AuthenticateService().get_logged_user)]):
+            return self.user_service.get_bag_info(user)
 
         return router

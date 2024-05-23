@@ -2,7 +2,7 @@ from pymongo.collection import Collection
 
 from app.db.mongo.auth.user import user_collection
 from app.decorator.parser import parse_as
-from app.entity.user import UserResponse, User
+from app.entity.game.user import UserResponse, User
 from app.repositories.core import BaseRepository
 
 

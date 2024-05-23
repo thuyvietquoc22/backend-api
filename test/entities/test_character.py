@@ -1,7 +1,7 @@
 from bson import ObjectId
 
-from app.entity.character import CharacterCreate
-from app.entity.root_character import RootCharacter
+from app.entity.game.character import CharacterCreate
+from app.entity.game.root_character import RootCharacter
 
 
 class TestCharacter:

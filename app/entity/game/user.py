@@ -1,8 +1,9 @@
 from typing import Optional, Any
 
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
-from app.entity.core import BaseMongoModel, UserDetails
+from app.entity.core import BaseMongoModel
+from app.entity.game.stone import Stone
 from app.utils.jwt_service import JWTSerializer
 
 
@@ -13,6 +14,17 @@ class BaseUser(BaseMongoModel, JWTSerializer):
     photo_url: Optional[str] = None
     ref_code: Optional[int] = None
     experience: Optional[int] = 0
+    stones: list[Stone] = []
+
+    @field_validator("stones")
+    def validate_stones(cls, value):
+        if value is None:
+            return []
+
+        if len(value) != len(set(value)):
+            raise ValueError("Duplicate stones")
+
+        return value
 
     @property
     def to_encode(self) -> dict[str, Any]:
@@ -41,7 +53,8 @@ class UserCreate(BaseUser):
             full_name=register.full_name,
             photo_url=register.photo_url,
             ref_code=register.ref_code,
-            experience=0
+            experience=0,
+            stones=[]
         )
 
 

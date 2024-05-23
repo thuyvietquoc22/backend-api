@@ -1,15 +1,11 @@
 from typing import Annotated
 
 from fastapi import APIRouter
-from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
-from jwt.exceptions import JWTDecodeError
+from fastapi import Depends
 
-from app.entity.user import User, UserResponse
+from app.entity.game.user import User, UserResponse
 from app.routers.core import BaseRouter, GameTag
 from app.services.game.authenticate import AuthenticateService
-from app.services.game.user import UserService
-from app.utils.jwt_service import JWTService
 
 
 class AuthenticateRouter(BaseRouter):

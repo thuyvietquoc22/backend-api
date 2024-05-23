@@ -13,7 +13,7 @@ def test_create_jwt_token():
     }
 
     response = JWTService().generate_token(payload)
-    logger.info(f"Token: {response}")
+    # logger.info(f"Token: {response}")
     assert response is not None
     assert isinstance(response, str)
     assert len(response) > 0

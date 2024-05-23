@@ -2,7 +2,7 @@ from bson import ObjectId
 
 from app.decorator import singleton
 from app.decorator.parser import parse_as
-from app.entity.user import UserRegister, UserCreate, UserResponse, UserUpdate, User
+from app.entity.game.user import UserRegister, UserCreate, UserResponse, UserUpdate, User
 from app.exceptions.not_updated_error import NotUpdatedError
 from app.repositories.user import UserRepository
 from app.utils.jwt_service import JWTService
@@ -49,7 +49,7 @@ class UserService:
 
     def get_user_token(self, tele_id):
         user: UserResponse = self.user_repo.get_user_info_by_tele_id(tele_id)
-        token = self.jwt_service.generate_token(user.tele_id)
+        token = self.jwt_service.generate_token(user)
         return token
 
     def get_user_info_by_token(self, token) -> User:
@@ -61,3 +61,4 @@ class UserService:
     def get_invited_user(self, tele_id):
         invited_user = self.user_repo.get_invited_user(tele_id)
         return invited_user
+

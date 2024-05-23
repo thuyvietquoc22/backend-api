@@ -1,7 +1,5 @@
-from pydantic import BaseModel
-
 from app.entity.core import BaseMongoModel, PyObjectId
-from app.entity.root_character import CharacterAttribute, RootCharacter
+from app.entity.game.root_character import CharacterAttribute, RootCharacter
 from app.utils.generate_code import generate_random_code
 
 
