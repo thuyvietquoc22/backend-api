@@ -88,3 +88,23 @@ class TestStone:
             assert False
         except ValueError:
             assert True
+    
+    @staticmethod
+    def test_convert_to_level_1():
+        stone = Stone(level=2, color="red", amount=1)
+        assert stone.convert_to_level_1().amount == 20
+
+        stone = Stone(level=2, color="red", amount=2)
+        assert stone.convert_to_level_1().amount == 40
+
+        stone = Stone(level=3, color="red", amount=1)
+        assert stone.convert_to_level_1().amount == 400
+
+        stone = Stone(level=3, color="red", amount=2)
+        assert stone.convert_to_level_1().amount == 800
+
+        stone = Stone(level=1, color="red", amount=1)
+        assert stone.convert_to_level_1().amount == 1
+
+        stone = Stone(level=1, color="red", amount=2)
+        assert stone.convert_to_level_1().amount == 2

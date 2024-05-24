@@ -4,6 +4,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 from app.entity.core import BaseMongoModel
+from app.entity.game.stone import StoneColor
 
 
 class CharacterAttribute(BaseModel):
@@ -11,7 +12,20 @@ class CharacterAttribute(BaseModel):
     attack: int
     defense: int
     energy: int
+
     # TODO: Add MORE attrs for Character
+
+    def get_current_stats(self, stone_color: StoneColor) -> int | None:
+        if stone_color == "red":
+            return self.attack
+
+        if stone_color == "green":
+            return self.defense
+
+        if stone_color == "blue":
+            return self.energy
+
+        return None
 
 
 class BaseRootCharacter(BaseMongoModel, ABC):

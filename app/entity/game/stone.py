@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import Literal, Callable
 
 from pydantic import BaseModel, Field
@@ -17,6 +18,9 @@ class Stone(BaseModel):
     @classmethod
     def of(cls, color: StoneColor, level: StoneLevel = 1) -> "Stone":
         return cls(level=level, color=color, amount=0)
+
+    def convert_to_level_1(self) -> "Stone":
+        return Stone(level=1, color=self.color, amount=self.amount * (20 ** (self.level - 1)))
 
     def insert_to(self, stones: list["Stone"]) -> int:
         """

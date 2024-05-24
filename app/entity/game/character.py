@@ -1,15 +1,31 @@
+from typing import Optional
+
 from bson import ObjectId
 
 from app.entity.core import BaseMongoModel, PyObjectId
 from app.entity.game.root_character import CharacterAttribute, RootCharacter
 from app.utils.generate_code import generate_random_code
-from pydantic import field_serializer
+from pydantic import field_serializer, BaseModel
 
 
 class BaseCharacter(BaseMongoModel, CharacterAttribute):
-    owner_id: str
+    owner_id: PyObjectId
     code: str
     root_character_id: PyObjectId
+
+
+class Character(BaseCharacter):
+    pass
+
+
+class CharacterUpdate(BaseModel):
+    attack: Optional[int] = None
+    defense: Optional[int] = None
+    energy: Optional[int] = None
+
+
+class CharacterResponse(BaseCharacter):
+    pass
 
 
 class CharacterCreate(BaseCharacter):
@@ -23,7 +39,6 @@ class CharacterCreate(BaseCharacter):
             root_character_id=root_character.id
         )
 
-    @staticmethod
     @field_serializer("root_character_id", "owner_id")
-    def serialize_id(value):
+    def serialize_id(self, value):
         return ObjectId(value)

@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from app.entity.game.root_character import RootCharacterCreate, RootCharacterUpdate
-from app.routers.core import BaseRouter
+from app.routers.core import BaseRouter, GameTag
 from app.services.game.root_character import RootCharacterService
 
 
@@ -9,10 +9,11 @@ class RootCharacterRouter(BaseRouter):
 
     def __init__(self):
         self.r_character_service = RootCharacterService()
+        self.tags = GameTag().get("Root Character")
 
     @property
     def router(self) -> APIRouter:
-        router = APIRouter(prefix="/root-characters", tags=["Game > Character"])
+        router = APIRouter(prefix="/root-characters", tags=self.tags)
 
         @router.get("")
         def get_characters():
