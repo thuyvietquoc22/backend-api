@@ -9,7 +9,7 @@ from app.exceptions.auth.authenticate_exception import AuthenticateException
 from app.exceptions.parse_none_exception import ParseNoneException
 from app.services.game.user import UserService
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login-for-docs")
 
 
 @singleton

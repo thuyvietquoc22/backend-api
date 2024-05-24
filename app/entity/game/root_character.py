@@ -1,4 +1,5 @@
 from abc import ABC
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -24,5 +25,13 @@ class RootCharacter(BaseRootCharacter, CharacterAttribute):
     pass
 
 
-class RootCharacterCreate(BaseRootCharacter):
+class RootCharacterUpdate(BaseModel):
+    url_model: Optional[str] = None
+    name: Optional[str] = None
+    attack: Optional[int] = None
+    defense: Optional[int] = None
+    energy: Optional[int] = None
+
+
+class RootCharacterCreate(RootCharacter):
     pass
