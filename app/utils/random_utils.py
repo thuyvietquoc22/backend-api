@@ -4,6 +4,10 @@ import random as rd
 
 __T__ = TypeVar('__T__')
 
+from loguru import logger
+
+from app.utils import calculate_level
+
 
 class RandomConfigBase(Generic[__T__], ABC):
     @property
@@ -19,7 +23,8 @@ class RandomConfigBase(Generic[__T__], ABC):
     def get_rate(self, current_exp: int):
         for level_range, callback in self.rate_by_exp.items():
             if current_exp in level_range:
-                return callback(current_exp)
+                level = calculate_level(current_exp)
+                return callback(level)
         return 0.0
 
 
@@ -29,7 +34,11 @@ class RandomUtils:
         self.configs = args
 
     def get_item(self, exp: int) -> __T__:
+
         list_value = [i.value for i in self.configs]
         weights = [i.get_rate(exp) for i in self.configs]
 
-        return rd.choices(list_value, weights=weights)[0]
+        logger.debug(f"List_value={list_value}, weights={weights}")
+        value = rd.choices(list_value, weights=weights)[0]
+        logger.debug(f"Value={value}")
+        return value
