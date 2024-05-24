@@ -40,6 +40,32 @@ class Stone(BaseModel):
     def __hash__(self):
         return hash((self.level, self.color))
 
+    def __ge__(self, other):
+        if self == other:
+            return self.amount >= other.amount
+        raise ValueError("Cannot compare different stone")
+
+    def __gt__(self, other):
+        if self == other:
+            return self.amount > other.amount
+        raise ValueError("Cannot compare different stone")
+
+    def __le__(self, other):
+        if self == other:
+            return self.amount <= other.amount
+        raise ValueError("Cannot compare different stone")
+
+    def __lt__(self, other):
+        if self == other:
+            return self.amount < other.amount
+        raise ValueError("Cannot compare different stone")
+
+    def __sub__(self, other):
+        if self == other:
+            self.amount -= other.amount
+            return self.amount - other.amount
+        raise ValueError("Cannot subtract different stone")
+
 
 class RandomLevel1Config(RandomConfigBase[StoneLevel]):
     @property

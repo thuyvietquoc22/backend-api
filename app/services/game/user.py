@@ -75,3 +75,25 @@ class UserService:
         inserted_index = list(set(inserted_index))
 
         self.user_repo.update_bag(user.stones, inserted_index, old_len, user.id)
+
+    def consume_stone(self, stones: set[Stone], user: User):
+
+        inserted_index = []
+
+        for stone in stones:
+            # Find Stone in bag
+            index = user.stones.index(stone)
+
+            # Check existed
+            if index == -1:
+                raise ValueError("Stone not found in bag")
+
+            inserted_index.append(index)
+
+            # Check amount
+            if user.stones[index].amount < stone.amount:
+                raise ValueError("Not enough stone to consume")
+
+            user.stones[index].amount -= stone.amount
+
+        self.user_repo.update_bag(user.stones, inserted_index, len(user.stones), user.id)

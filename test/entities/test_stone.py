@@ -5,7 +5,7 @@ class TestStone:
 
     @staticmethod
     def test_stone_eq():
-        stone1 = Stone(level=1, color="red", amount=100);
+        stone1 = Stone(level=1, color="red", amount=100)
         stone2 = Stone(level=1, color="red", amount=200)
         assert stone1 == stone2
 
@@ -71,3 +71,20 @@ class TestStone:
 
         assert stones[-1] == stone
         assert len(stones) == 4
+
+    @staticmethod
+    def test_compare_stone():
+        stone1 = Stone(level=1, color="red", amount=100)
+        stone2 = Stone(level=1, color="red", amount=200)
+        stone3 = Stone(level=1, color="blue", amount=100)
+
+        assert not stone1 >= stone2
+        assert stone1 <= stone2
+        assert stone1 < stone2
+        assert not stone1 > stone2
+        assert stone1 != stone3
+        try:
+            stone1 >= stone3
+            assert False
+        except ValueError:
+            assert True
