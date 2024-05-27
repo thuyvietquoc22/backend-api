@@ -26,5 +26,11 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "secret"
     TOKEN_EXPIRED_TIME: int = 24
 
+    # LIMITER
+    REDIS_URL: str = "redis://localhost"
+    REDIS_PREFIX: str = "fastapi-limiter"
+    RATE_LIMIT_TIME: int = 60
+    RATE_LIMIT_REQUEST: int = 50
+
 
 settings = Settings()

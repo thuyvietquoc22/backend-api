@@ -8,4 +8,3 @@ class RootCharacterRepository(BaseRepository):
     @property
     def collection(self) -> Collection:
         return root_character_collection
-

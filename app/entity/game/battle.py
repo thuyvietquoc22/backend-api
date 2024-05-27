@@ -4,7 +4,7 @@ from pydantic import Field, BaseModel, field_serializer
 from app.entity.core import BaseMongoModel, PyObjectId
 from app.entity.game.bot import BotInfo
 from app.entity.game.character import CharacterResponse
-from app.entity.game.user import UserResponse, UserInfo
+from app.entity.game.user import UserInfo
 
 
 class BattleStart(BaseModel):

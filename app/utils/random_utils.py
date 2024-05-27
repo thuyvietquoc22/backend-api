@@ -1,6 +1,6 @@
+import random as rd
 from abc import abstractmethod, ABC
 from typing import Generic, TypeVar, Callable
-import random as rd
 
 __T__ = TypeVar('__T__')
 
@@ -34,7 +34,6 @@ class RandomUtils:
         self.configs = args
 
     def get_item(self, exp: int) -> __T__:
-
         list_value = [i.value for i in self.configs]
         weights = [i.get_rate(exp) for i in self.configs]
 

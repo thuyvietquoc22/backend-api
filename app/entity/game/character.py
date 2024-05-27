@@ -1,11 +1,11 @@
 from typing import Optional
 
 from bson import ObjectId
+from pydantic import field_serializer, BaseModel
 
 from app.entity.core import BaseMongoModel, PyObjectId
 from app.entity.game.root_character import CharacterAttribute, RootCharacter
 from app.utils.generate_code import generate_random_code
-from pydantic import field_serializer, BaseModel
 
 
 class BaseCharacter(BaseMongoModel, CharacterAttribute):

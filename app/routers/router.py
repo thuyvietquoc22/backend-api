@@ -1,7 +1,6 @@
 from fastapi import APIRouter, FastAPI
 
 from app.core.config import settings
-from app.routers.chat import ChatRouterGroup
 from app.routers.core import BaseRouterGroup
 from app.routers.game import GameRouterGroup
 

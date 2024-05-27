@@ -1,6 +1,6 @@
 from abc import abstractmethod, ABC
 from datetime import datetime, timedelta
-from typing import Union, Any, TypeVar, Generic
+from typing import Union, Any
 
 import jwt
 from jwt.jwk import OctetJWK

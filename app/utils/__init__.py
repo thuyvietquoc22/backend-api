@@ -1,4 +1,4 @@
-from math import sqrt, e
+from math import sqrt
 
 
 def calculate_level(exp: int) -> int:

@@ -2,9 +2,9 @@ from typing import Annotated
 
 from fastapi import APIRouter, Form
 from fastapi import Depends
-from fastapi.security import OAuth2PasswordRequestForm
-from pydantic import BaseModel
+from fastapi_limiter.depends import RateLimiter
 
+from app.core.config import settings
 from app.entity.game.user import User, UserResponse
 from app.routers.core import BaseRouter, GameTag
 from app.services.game.authenticate import AuthenticateService
@@ -20,7 +20,9 @@ class AuthenticateRouter(BaseRouter):
     def router(self) -> APIRouter:
         router = APIRouter(prefix="/auth", tags=["Game > Authenticate"])
 
-        @router.post("/login-for-docs")
+        @router.post("/login-for-docs",
+                     dependencies=[
+                         Depends(RateLimiter(times=settings.RATE_LIMIT_REQUEST, seconds=settings.RATE_LIMIT_TIME))])
         async def login_for_docs(
                 username: int = Form(...),
         ):
@@ -29,7 +31,9 @@ class AuthenticateRouter(BaseRouter):
                 "": ""
             }
 
-        @router.get("/me", response_model=UserResponse)
+        @router.get("/me", response_model=UserResponse,
+                    dependencies=[
+                        Depends(RateLimiter(times=settings.RATE_LIMIT_REQUEST, seconds=settings.RATE_LIMIT_TIME))])
         async def read_users_me(
                 current_user: Annotated[User, Depends(AuthenticateService().validate_token)],
         ):

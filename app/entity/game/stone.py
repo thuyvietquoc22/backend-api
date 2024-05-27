@@ -1,4 +1,3 @@
-from enum import Enum
 from typing import Literal, Callable
 
 from pydantic import BaseModel, Field

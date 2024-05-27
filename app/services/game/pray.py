@@ -29,6 +29,7 @@ class PrayService:
 
     def pray(self, user: User, time: int = 1) -> list[Stone]:
         stones = [self.random_stone(user.experience) for _ in range(time)]
-        logger.info(f"User {user.username} has lv {calculate_level(user.experience)} prayed {time} times and received {len(stones)} stones is {stones}")
+        logger.info(
+            f"User {user.username} has lv {calculate_level(user.experience)} prayed {time} times and received {len(stones)} stones is {stones}")
         self.user_service.add_stone_to_user(user, stones)
         return stones

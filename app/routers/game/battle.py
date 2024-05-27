@@ -1,7 +1,9 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends
+from fastapi_limiter.depends import RateLimiter
 
+from app.core.config import settings
 from app.entity.game.battle import BattleStart, BattleEnd
 from app.entity.game.user import User
 from app.routers.core import BaseRouter, GameTag
@@ -29,7 +31,9 @@ class BattleRouter(BaseRouter):
                          user: Annotated[User, Depends(AuthenticateService().get_logged_user)]):
             return self.battle_service.start_battle(battle_create, user)
 
-        @router.post("/end/{battle_id}")
+        @router.post("/end/{battle_id}",
+                     dependencies=[
+                         Depends(RateLimiter(times=settings.RATE_LIMIT_REQUEST, seconds=settings.RATE_LIMIT_TIME))])
         def end_battle(
                 battle_id: str,
                 battle_end: BattleEnd,
@@ -37,7 +41,9 @@ class BattleRouter(BaseRouter):
         ):
             return self.battle_service.end_battle(battle_id, battle_end, user)
 
-        @router.get("/history")
+        @router.get("/history",
+                    dependencies=[
+                        Depends(RateLimiter(times=settings.RATE_LIMIT_REQUEST, seconds=settings.RATE_LIMIT_TIME))])
         def get_battle_history(user: Annotated[User, Depends(AuthenticateService().get_logged_user)]):
             return self.battle_service.get_battle_history(user)
 

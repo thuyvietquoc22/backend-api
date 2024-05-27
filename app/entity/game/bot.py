@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import Field
 
 from app.entity.game.root_character import CharacterAttribute
 
