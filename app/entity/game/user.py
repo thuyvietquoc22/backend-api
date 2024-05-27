@@ -7,13 +7,16 @@ from app.entity.game.stone import Stone
 from app.utils.jwt_service import JWTSerializer
 
 
-class BaseUser(BaseMongoModel, JWTSerializer):
+class UserInfo(BaseMongoModel):
     tele_id: int
     username: Optional[str] = None
     full_name: Optional[str] = None
     photo_url: Optional[str] = None
-    ref_code: Optional[int] = None
     experience: Optional[int] = 0
+
+
+class BaseUser(UserInfo, JWTSerializer):
+    ref_code: Optional[int] = None
     stones: list[Stone] = []
 
     @field_validator("stones")
