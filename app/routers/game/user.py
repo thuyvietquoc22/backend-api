@@ -30,6 +30,10 @@ class UserRouter(BaseRouter):
         def get_user_bag(user: Annotated[User, Depends(AuthenticateService().get_logged_user)]):
             return user.stones
 
+        @router.get("/experience")
+        def get_user_exp(user: Annotated[User, Depends(AuthenticateService().get_logged_user)]):
+            return user.exp
+
         @router.get("/{tele_id}", response_model=UserBasicResponse)
         def get_user(tele_id: int):
             return self.user_service.get_user_info_by_id(tele_id)
